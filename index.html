@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhavya Negi — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0a;
+    --bg-warm: #0d0b09;
+    --card: #141414;
+    --card-hi: #1a1a1a;
+    --line: #2a2a2a;
+    --line-soft: #1f1f1f;
+    --text: #ececec;
+    --text-dim: #a3a3a3;
+    --text-faint: #676767;
+    --gold: #c9a877;
+    --gold-dim: #6b5b41;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', serif;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* film grain texture */
+  body::before{
+    content:'';
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  ::selection{ background: var(--gold); color: #0a0a0a; }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 100;
+    padding: 28px 0;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.9), transparent);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+  }
+  .logo{
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    letter-spacing: 5px;
+    font-weight: 500;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+  .nav-links{
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    display:flex;
+    gap: 16px;
+  }
+  .nav-links a{ transition: color 0.2s ease; }
+  .nav-links a:hover{ color: var(--gold); }
+  .nav-links .sep{ color: var(--line); }
+
+/* ---------- Contact popup ---------- */
+  .contact-wrap{ position: relative; display: inline-block; }
+.contact-popup{
+  position: absolute;
+  top: calc(100% + 16px);
+  right: 0;
+  background: var(--card-hi);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 16px 20px;
+  min-width: 240px;
+  box-shadow: 0 16px 40px -12px rgba(0,0,0,0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 200;
+}
+.contact-popup.open{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.contact-popup::before{
+  content:'';
+  position: absolute;
+  top: -6px;
+  right: 18px;
+  width: 11px; height: 11px;
+  background: var(--card-hi);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  transform: rotate(45deg);
+}
+.popup-row{
+  font-family: 'Jost', sans-serif;
+  font-size: 13.5px;
+  letter-spacing: 0.3px;
+  color: var(--text-dim);
+  padding: 6px 0;
+}
+.popup-row:first-child{ color: var(--text); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-top: 60px;
+    overflow: hidden;
+  }
+  .hero::after{
+    content:'';
+    position:absolute;
+    top: 50%; left: 50%;
+    width: 900px; height: 900px;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(201,168,119,0.05), transparent 65%);
+    pointer-events: none;
+  }
+  .hero-eyebrow{
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display:flex;
+    align-items:center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before{
+    content:'';
+    width: 40px; height: 1px;
+    background: var(--gold-dim);
+  }
+  .hero h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(56px, 9vw, 128px);
+    line-height: 0.98;
+    letter-spacing: -1px;
+    color: var(--text);
+    max-width: 900px;
+  }
+  .hero h1 em{
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-faint);
+  }
+  .hero-role{
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 30px 0 44px;
+    display:flex;
+    align-items:center;
+    gap: 18px;
+  }
+  .hero-role .dot{ width:5px; height:5px; border-radius:50%; background: var(--gold-dim); }
+
+  .hero-cta{ display:flex; gap: 16px; flex-wrap: wrap; }
+  .btn{
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .btn-primary{
+    background: var(--gold);
+    color: #0a0a0a;
+    font-weight: 500;
+  }
+  .btn-primary:hover{ background: #d9bd8f; letter-spacing: 2px; }
+  .btn-outline{
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+  }
+  .btn-outline:hover{ border-color: var(--gold-dim); color: var(--text); }
+
+  .scroll-cue{
+    position: absolute;
+    bottom: 48px; left: 40px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    display:flex;
+    align-items:center;
+    gap: 12px;
+  }
+  .scroll-cue::after{
+    content:'';
+    width: 1px; height: 40px;
+    background: linear-gradient(var(--text-faint), transparent);
+    animation: scrolldown 2s ease-in-out infinite;
+  }
+  @keyframes scrolldown{
+    0%{ transform: scaleY(0); transform-origin: top; }
+    50%{ transform: scaleY(1); transform-origin: top; }
+    50.01%{ transform: scaleY(1); transform-origin: bottom; }
+    100%{ transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ---------- Section shared ---------- */
+  section{ padding: 130px 0; }
+  .section-label{
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 16px;
+    display:flex;
+    align-items:center;
+    gap: 14px;
+  }
+  .section-label::before{
+    content:'';
+    width: 32px; height: 1px;
+    background: var(--gold-dim);
+  }
+  h2.section-title{
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 56px;
+  }
+
+  .reveal{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in{ opacity: 1; transform: translateY(0); }
+
+  /* ---------- About card ---------- */
+  .about-card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 60px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 56px;
+  }
+  .about-card::before{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent 60%);
+  }
+
+  .quote-mark{
+    position: absolute;
+    top: 44px;
+    right: 60px;
+    font-family: Georgia, serif;
+    font-size: 90px;
+    line-height: 0.5;
+    color: var(--gold-dim);
+    opacity: 0.6;
+    user-select: none;
+  }
+
+  .photo{
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--line-soft);
+  }
+  .photo svg{ width:100%; height:100%; display:block; }
+  .photo-label{
+    position:absolute;
+    bottom: 14px; left: 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(236,236,236,0.55);
+    text-transform: uppercase;
+  }
+
+  .about-body{ display:flex; flex-direction: column; justify-content: center; }
+  .about-body p{
+    font-size: 20px;
+    text-align: justify;
+    color: var(--text-dim);
+    margin-bottom: 30px;
+  }
+  .about-body p .hl{
+    color: var(--text);
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  .skills-box{
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 22px 26px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13.5px;
+    letter-spacing: 0.3px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px 0;
+  }
+  .skills-box .label{
+    color: var(--gold);
+    font-weight: 500;
+    margin-right: 10px;
+  }
+  .skill-pill{
+    color: var(--text-dim);
+    position: relative;
+    padding: 0 14px;
+  }
+  .skill-pill:first-of-type{ padding-left: 0; }
+  .skill-pill::before{
+    content:'/';
+    position:absolute;
+    left: -2px;
+    color: var(--line);
+  }
+  .skill-pill:first-of-type::before{ content:''; }
+
+  @media (max-width: 860px){
+    .about-card{ grid-template-columns: 1fr; padding: 40px 28px; }
+    .quote-mark{ top: 26px; right: 28px; font-size: 60px; }
+  }
+
+  /* ---------- Projects ---------- */
+  .projects-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .project-card{
+    background: var(--bg);
+    position: relative;
+    transition: background 0.3s ease;
+  }
+  .project-card:hover{ background: var(--card); }
+  .project-index{
+    position: absolute;
+    top: 28px; right: 32px;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--text-faint);
+    letter-spacing: 1px;
+  }
+  .project-thumb{
+    height: 190px;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-thumb svg{ width:100%; height:100%; display:block; transition: transform 0.6s ease; }
+  .project-card:hover .project-thumb svg{ transform: scale(1.06); }
+  .project-thumb .ph-tag{
+    position:absolute;
+    bottom: 12px; left: 32px;
+    font-family: 'Jost', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(236,236,236,0.5);
+  }
+  .project-body{ padding: 30px 32px 36px; }
+  .project-name{
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .project-desc{
+    font-size: 16.5px;
+    color: var(--text-dim);
+    margin-bottom: 22px;
+    max-width: 90%;
+  }
+  .project-links{
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display:flex;
+    gap: 26px;
+  }
+  .project-links a{
+    color: var(--text-faint);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .project-links a:hover{ color: var(--gold); border-color: var(--gold-dim); }
+
+  @media (max-width: 720px){
+    .projects-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Contact / Footer ---------- */
+  .contact-block{
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  .contact-block h2{
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .contact-block p{
+    color: var(--text-dim);
+    font-size: 18px;
+    max-width: 480px;
+    margin: 0 auto 40px;
+  }
+  .contact-links{ display:flex; justify-content:center; gap: 16px; flex-wrap: wrap; }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 36px 0;
+    text-align:center;
+    font-family: 'Jost', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+    color: var(--text-faint);
+  }
+  footer a{ color: var(--text-dim); transition: color 0.2s ease; }
+  footer a:hover{ color: var(--gold); }
+  footer .sep{ margin: 0 10px; color: var(--line); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Bhavya Negi</div>
+    <div class="nav-links">
+      <a href="https://drive.google.com/file/d/1tiLuuV7PRGfnUYeAo5oyxv3lkkyZBTMr/view?usp=sharing" id="resume-link">Resume</a>
+    
+<span class="sep">|</span>
+<span class="contact-wrap">
+  <a href="#" id="contact-toggle">Contact</a>
+  <div class="contact-popup" id="contact-popup">
+    <div class="popup-row">bhavyavsnegi67@gmail.com</div>
+    <div class="popup-row">+91 7310506867</div>
+  </div>
+</span>
+    </div>
+  </div>
+</nav>
+
+<div class="hero wrap">
+  <div class="hero-eyebrow">Software Developer</div>
+  <h1>Building things<br>that feel <em>effortless.</em></h1>
+  <div class="hero-role"><span class="dot"></span>React &amp; Next.js &nbsp;·&nbsp; TypeScript &amp; Python &nbsp;·&nbsp; Node.js &amp; SQL</div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</div>
+
+<section id="about">
+  <div class="wrap reveal">
+    <div class="about-card">
+      <div class="quote-mark">&#8221;&#8221;</div>
+
+      <div class="photo">
+        <img src="photoo.jpg" alt="Bhavya Negi" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05);">
+      </div>
+
+      <div class="about-body">
+        <p>Hey there, I'm <span class="hl">Bhavya Negi</span>, a <span class="hl">Software Developer</span> who likes to solve problems. I'm focused on modern web technologies, and I enjoy transforming complex ideas into intuitive products that feel effortless to use. I care about clean code, thoughtful interfaces, and building things that simply work the way people expect them to.</p>
+
+        <div class="skills-box">
+          <span class="label">Skills</span>
+          <span class="skill-pill">React.js</span>
+          <span class="skill-pill">Next.js</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">TypeScript</span>
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">Pandas</span>
+          <span class="skill-pill">NumPy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap reveal">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <span class="project-index">01</span>
+       <div class="project-thumb">
+  <img src="sensaiimg.jpg" alt="Project One" style="width:100%;height:100%;object-fit:cover;display:block;contrast(1.05);">
+</div>
+        <div class="project-body">
+          <div class="project-name">Sensai</div>
+          <p class="project-desc">Ai Powered career coach website.</p>
+          <div class="project-links">
+            <a href="https://sensai-mocha.vercel.app/">Live Demo</a>
+            <a href="https://github.com/bhav59/Sensai">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-index">02</span>
+        <div class="project-thumb">
+        <img src="keyoimg.jpg" alt="Project Two" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+        <div class="project-body">
+          <div class="project-name">Keyo</div>
+          <p class="project-desc">Car Marketplace website.</p>
+          <div class="project-links">
+            <a href="#">Live Demo</a>
+            <a href="https://github.com/bhav59/Keyo">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-index">03</span>
+       <div class="project-thumb">
+  <img src="dealdropimg.jpg" alt="Project Three" style="width:100%;height:100%;object-fit:cover;display:block;">
+  </div>
+        <div class="project-body">
+          <div class="project-name">Deal Drop</div>
+          <p class="project-desc">Smart price Tracking system for Ecommerce Products.</p>
+          <div class="project-links">
+            <a href="https://dealdropshop.vercel.app/">Live Demo</a>
+            <a href="https://github.com/bhav59/dealdrop">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-index">04</span>
+        <div class="project-thumb">
+     <img src="ilpformfiller.jpg" alt="Project Four" style="width:100%;height:100%;object-fit:cover;display:block;">
+     </div>
+        <div class="project-body">
+          <div class="project-name">ILP form filler</div>
+          <p class="project-desc">Automates the process of filling out ILP forms.</p>
+          <div class="project-links">
+            <a href="https://github.com/bhav59/ILP-Form-Filler-Chrome-Extension">Live Demo</a>
+            <a href="https://github.com/bhav59/ILP-Form-Filler-Chrome-Extension">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-block reveal">
+    <div class="section-label" style="justify-content:center;">Get In Touch</div>
+    <h2>Reach out to me<br></h2>
+    <p>Have somnething in mind, or just want to say hi? My inbox is always open.</p>
+    <div class="contact-links">
+      <a href="mailto:bhavyavsnegi67@gmail.com" class="btn btn-primary">Email Me</a>
+      <a href="https://github.com/bhav59" class="btn btn-outline">GitHub</a>
+      <a href="https://www.linkedin.com/in/bhav593/" class="btn btn-outline">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    &copy; 2026 Bhavya Negi
+    <span class="sep">|</span>
+    <a href="https://github.com/bhav59" target="_blank">GitHub</a>
+    <span class="sep">|</span>
+    <a href="https://www.linkedin.com/in/bhav593/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+const contactToggle = document.getElementById('contact-toggle');
+const contactPopup = document.getElementById('contact-popup');
+contactToggle.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  contactPopup.classList.toggle('open');
+});
+document.addEventListener('click', (e) => {
+  if(!contactPopup.contains(e.target) && e.target !== contactToggle){
+    contactPopup.classList.remove('open');
+  }
+});
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
